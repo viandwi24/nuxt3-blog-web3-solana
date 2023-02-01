@@ -16,8 +16,8 @@ const getUserAccountByAddress = (address: string) => {
   return users.value.find((user) => user.address === address)
 }
 
-const getSolExplorerUrl = (pubkey: string) => {
-  return `https://solaneyes.com/address/${pubkey}?cluster=devnet`
+const toUser = (pubkey: string) => {
+  return { name: 'user-id', params: { id: pubkey || '' } }
 }
 </script>
 
@@ -28,12 +28,15 @@ const getSolExplorerUrl = (pubkey: string) => {
         <div class="font-bold text-xl">Users</div>
       </template>
       <div v-if="!usersLoading && users.length > 0" class="flex space-x-2">
-        <a v-for="item in users" :key="item.address" class="w-12 h-12 bg-slate-500 rounded-full" :href="getSolExplorerUrl(item.address)" target="_blank">
+        <NuxtLink v-for="item in users" :key="item.address" class="w-12 h-12 bg-slate-500 rounded-full" :to="toUser(item.address)">
           <img :src="item.avatar" class="w-12 h-12 rounded-full" :alt="`Avatar of ${item.name}`" />
-        </a>
+        </NuxtLink>
       </div>
       <div v-else-if="!usersLoading && users.length === 0" class="w-full text-center">No users found</div>
-      <div v-else-if="usersLoading" class="w-full text-center">Loading...</div>
+      <div v-if="usersLoading" class="w-full text-center flex items-center justify-center space-x-2">
+        <Icon name="line-md:loading-twotone-loop" class="" />
+        <div class="text-sm">Loading users...</div>
+      </div>
     </Card>
     <template v-if="!postsLoading && posts.length > 0">
       <Card v-for="item in posts" :key="item.address" class="mb-6">
@@ -42,7 +45,12 @@ const getSolExplorerUrl = (pubkey: string) => {
             <img :src="getUserAccountByAddress(item.user)?.avatar" class="w-full h-full" alt="Avatar" />
           </div>
           <div class="w-1 h-1 bg-gray-500" />
-          <div class="text-xs font-thin">{{ getUserAccountByAddress(item.user)?.name }}</div>
+          <NuxtLink
+            :to="toUser(getUserAccountByAddress(item.user)?.address || '')"
+            class="text-xs font-thin hover:underline"
+          >
+            {{ getUserAccountByAddress(item.user)?.name }}
+          </NuxtLink>
           <div class="w-1 h-1 bg-gray-500" />
           <a :href="getSolExplorerUrl(getUserAccountByAddress(item.user)?.authority || '')" target="_blank" class="text-xs font-thin underline hover:text-primary-500">{{ shortPubKey(getUserAccountByAddress(item.user)?.authority || '') }}</a>
         </div>
@@ -58,6 +66,9 @@ const getSolExplorerUrl = (pubkey: string) => {
     <div v-else-if="!postsLoading && posts.length === 0">
       <div class="w-full text-center">No posts found</div>
     </div>
-    <div v-else-if="postsLoading" class="w-full text-center">Loading posts...</div>
+    <div v-else-if="postsLoading" class="w-full text-center flex items-center justify-center space-x-2">
+      <Icon name="line-md:loading-twotone-loop" class="" />
+      <div class="text-sm">Loading posts...</div>
+    </div>
   </div>
 </template>

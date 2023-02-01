@@ -6,7 +6,7 @@ const $auth = useAuth()
 
 <template>
   <div class="screen w-full min-h-screen bg-slate-900 text-gray-200">
-    <div class="navbar fixed z-30 top-0 left-0 w-full h-[68px] flex border-b-2 border-primary-500/80">
+    <div class="navbar fixed z-30 top-0 left-0 w-full h-[68px] flex border-b-2 border-primary-500/80 bg-slate-900/80 shadow-lg backdrop-filter backdrop-blur-lg">
       <div class="flex-1 max-w-screen-lg mx-auto w-full flex items-center justify-between">
         <div>
           <NuxtLink class="text-lg font-bold capitalize text-white" to="/">Web3 Blog Nuxt3 + solana</NuxtLink>
