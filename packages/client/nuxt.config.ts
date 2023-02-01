@@ -1,7 +1,9 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+
 const APP_TITLE = 'Blog Web3 With Nuxt & Solana'
 const APP_DESC = 'a decentral blog made using nuxt and solana with web3 concept'
 
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
   app: {
@@ -36,6 +38,12 @@ export default defineNuxtConfig({
       include: ["@project-serum/anchor", "@solana/web3.js", "buffer", "@solana/wallet-adapter-base"],
       esbuildOptions: {
         target: "esnext",
+        define: {
+          global: "globalThis",
+        },
+        plugins: [
+          NodeGlobalsPolyfillPlugin() as any,
+        ]
       },
     },
     define: {
