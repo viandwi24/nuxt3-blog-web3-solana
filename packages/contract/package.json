@@ -1,5 +1,7 @@
 {
   "name": "@nuxt3-blog-web3-solana/contract",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",

@@ -1,5 +1,7 @@
 {
   "name": "@nuxt3-blog-web3-solana/client",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

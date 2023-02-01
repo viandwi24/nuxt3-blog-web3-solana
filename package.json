@@ -2,5 +2,11 @@
   "name": "nuxt3-blog-web3-solana",
   "private": true,
   "version": "0.0.1",
-  "description": "Desentralize Blog Web3 with Solana & Nuxt"
+  "description": "Desentralize Blog Web3 with Solana & Nuxt",
+  "scripts": {
+    "generate": "lerna run generate --stream --parallel"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
