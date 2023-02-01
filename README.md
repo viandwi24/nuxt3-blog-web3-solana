@@ -1,7 +1,10 @@
 # Desentralize Blog Web3 With Nuxt & Solana
 a decentral blog made using nuxt and solana with web3 concept
 
+![preview](assets/images/preview.png)
+
 ## Try to Develop
+
 - clone this repo
 - make sure you have `pnpm` and `solana cli` installed on your computer
 - install node modules with `pnpm i`
